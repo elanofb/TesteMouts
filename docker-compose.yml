@@ -1,0 +1,58 @@
+services:
+  order.webapi:
+    container_name: order_webapi
+    image: ${DOCKER_REGISTRY-}orderwebapi
+    build:
+      context: .
+      dockerfile: src/Order.WebApi/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+    ports:
+      - "8080"
+      - "8081"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+
+  order.database:
+    container_name: order_database
+    image: postgres:13
+
+    environment:
+      POSTGRES_DB: developer_evaluation
+      POSTGRES_USER: developer
+      POSTGRES_PASSWORD: ev@luAt10n
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+  order.nosql:
+    container_name: order_nosql 
+    image: mongo:8.0    
+    environment:
+        MONGO_INITDB_ROOT_USERNAME: developer
+        MONGO_INITDB_ROOT_PASSWORD: ev@luAt10n
+    ports:
+      - "27017"
+
+  order.cache:
+    container_name: order_cache 
+    image: redis:7.4.1-alpine     
+    command: redis-server --requirepass ev@luAt10n
+    environment:
+       MONGO_INITDB_ROOT_USERNAME: developer
+       MONGO_INITDB_ROOT_PASSWORD: ev@luAt10n
+    ports:
+       - "6379"
+
+  order.rabbitmq:
+    container_name: order_rabbitmq
+    image: rabbitmq:3-management
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "5672:5672" # Porta para comunicação com o RabbitMQ
+      - "15672:15672" # Porta para acessar o painel de gerenciamento do RabbitMQ

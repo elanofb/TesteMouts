@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Entities\OrderItem_cs" />
+    <None Remove="Entities\Order_cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entities\OrderItem_cs" />
+    <Compile Include="Entities\Order_cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Enums\" />
+    <Folder Include="Exceptions\" />
+    <Folder Include="Events\" />
+    <Folder Include="ValueObjects\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.10.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Mouts.Order.Common\Mouts.Order.Common.csproj" />
+  </ItemGroup>
+
+</Project>
