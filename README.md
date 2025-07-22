@@ -5,12 +5,6 @@
 ## Visão Geral
 Este repositório contém a implementação do backend do projeto Order Service, utilizando .NET 8.0 e PostgreSQL. O projeto segue a arquitetura Clean Architecture e CQRS.
 
-## Video Exibição
-O funcionamento do "Order Service" pode ser visualizado através do link: https://youtu.be/-sVqyYctvsA
-
-
-https://github.com/user-attachments/assets/fc9686a7-d20d-434c-a40e-8ae9fc3c3f62
-
 ## Tecnologias Utilizadas
 
 ### Backend
